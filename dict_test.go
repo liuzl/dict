@@ -16,6 +16,14 @@ func TestDict(t *testing.T) {
 	trie.SaveToFile("cedar.gob", "gob")
 	d := New()
 	d.LoadFromFile("cedar.gob", "gob")
-	ret := d.MultiSearch("《姑苏城外寒山寺》是一首挺好的诗")
+
+	str := "《姑苏城外寒山寺》是一首挺好的诗,姑苏就是现在的苏州."
+	ret := d.MultiSearch(str)
 	t.Log(ret)
+
+	matches, err := d.MultiMatch(str)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(matches)
 }
